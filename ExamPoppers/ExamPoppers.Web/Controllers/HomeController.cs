@@ -14,5 +14,10 @@ namespace ExamPoppers.Web.Controllers
         {
             return View();
         }
+        public ActionResult NavBar()
+        {
+            return PartialView("_NavBar");
+        }
+
 	}
 }
