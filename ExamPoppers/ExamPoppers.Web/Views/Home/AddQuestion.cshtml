@@ -1,0 +1,55 @@
+﻿@model List<ExamPoppers.Model.Question>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>View and Add Questions</h3>
+<table class="table table-striped">
+   <thead>
+      <tr>
+          <th>
+              Question
+          </th>
+          <th>
+              Answer
+          </th>
+      </tr>
+   </thead>
+    <tbody>
+        @foreach(var q in Model)
+        {
+            <tr>
+                <td>
+                    @q.Content
+                </td>
+                <td>
+                    @q.Answer
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<form>
+    <div class="form-group">
+       <div class="col-md-4">
+           <label>Question:</label>
+           <input type="text" />
+       </div>
+        <div class="col-md-4">
+            <label>Answer:</label>
+            <input type="text" />
+        </div>
+        
+    </div>
+    <button class="btn btn-default" onclick="">Add Question</button>
+</form>
+@*@section Scripts
+{
+    function edit_addBreakout() {
+    $('.hiddenDiv')
+        .children()
+        .clone()
+        .appendTo($('.BreakoutSection'));
+}
+}*@

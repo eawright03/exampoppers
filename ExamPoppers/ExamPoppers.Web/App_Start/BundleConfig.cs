@@ -15,7 +15,7 @@ namespace ExamPoppers.Web.App_Start
                 .Include("~/Content/bootstrap-theme.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/commonjavascript")
-                .Include("~/Scripts/jquery-1.10.2.min.js")
+                .Include("~/Scripts/jquery-2.1.4.min.js")
                 .Include("~/Scripts/bootstrap.min.js"));
 
             BundleTable.EnableOptimizations = true;

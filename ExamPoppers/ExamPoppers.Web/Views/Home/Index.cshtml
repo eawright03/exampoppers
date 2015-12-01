@@ -4,16 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
-        hello world!
+
+@*Dropdown not working?*@
+    <div class="col-sm-offset-3"> 
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                <h2>  Let's Get Started </h2> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li><a href="#">Start New Game</a></li>
+                <li><a href="@Url.Action("AddQuestion", "Home")">Add Questions</a></li>
+                <li><a href="#">Check High Scores</a></li>
+            </ul>
+        </div>
+
     </div>
-</body>
-</html>
+
