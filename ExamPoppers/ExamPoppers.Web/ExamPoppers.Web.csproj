@@ -171,7 +171,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\_NavBar.cshtml" />
-    <Content Include="Views\Home\AddQuestion.cshtml" />
+    <Content Include="Views\Home\AddQuestionandQuestionList.cshtml" />
+    <Content Include="Views\Home\_AddQuestion.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
