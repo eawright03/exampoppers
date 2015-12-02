@@ -1,0 +1,16 @@
+﻿@model ExamPoppers.Model.Question
+@using (Html.BeginForm("AddQuestion", "Home", FormMethod.Post))
+{ 
+<div class="form-group">
+    <div class="col-md-4">
+        <label>Question:</label>
+        @Html.TextBoxFor(m => Model.Content)
+    </div>
+    <div class="col-md-4">
+        <label>Answer:</label>
+        @Html.TextBoxFor(m => Model.Answer)
+    </div>
+
+</div>
+<button type="submit" class="btn btn-default" onclick="">Add Question</button>
+}

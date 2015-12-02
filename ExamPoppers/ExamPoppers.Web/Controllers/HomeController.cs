@@ -64,14 +64,23 @@ namespace ExamPoppers.Web.Controllers
             //add q to db
             var query =
                 from question in db.Question
-                select new { Content = question.Content };
+                select new { Content = question.Content, Answer = question.Answer };
             query.ToList();
            // q = new Question();
-            q.Id = query.Count();
+            //q.Id = query.Count();
             db.Question.Insert(q);
-         //NEED TP RE-RENDER SCREEN
+            List<Question> qList = new List<Question>();
+            foreach (var x in query)
+            {
+                qList.Add(new Question
+                {
+                //    Id = x.Id,
+                    Content = x.Content,
+                    Answer = x.Answer
+                });
+            }
 
-            return View("AddQuestionAndQuestionList");
+            return View("AddQuestionAndQuestionList", qList);
         }
         public ActionResult NavBar()
         {
