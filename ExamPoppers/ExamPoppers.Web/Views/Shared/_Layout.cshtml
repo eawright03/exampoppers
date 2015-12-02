@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    @Styles.Render("~/bundles/commoncss")
+    @RenderSection("Style", required: false)
+</head>
+<body>
+    @Scripts.Render("~/bundles/commonjavascript")
+    @RenderSection("Script", required: false)
+
+    @Html.Action("NavBar", "Home")
+    <div id="page_content" class="container-fluid">
+        @RenderBody()
+    </div>
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year </p>
+
+
+
+    </footer>
+</body>
+</html>
