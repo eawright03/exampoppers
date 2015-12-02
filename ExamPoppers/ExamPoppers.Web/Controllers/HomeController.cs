@@ -25,7 +25,8 @@ namespace ExamPoppers.Web.Controllers
         {
             var query =
                 from q in db.Question
-                select new {
+                select new
+                {
 					Content = q.Content,
 					Answer1 = q.Answer1,
 					Answer2 = q.Answer2,
@@ -125,7 +126,8 @@ namespace ExamPoppers.Web.Controllers
         public void InitializeDatabase()
         {
             db = new EPDatabase();
-            db.Question.Insert(new Question {
+            db.Question.Insert(new Question
+            {
                 Id = 1,
                 Content = "What color is the sky?",
                 Answer1 = "Blue",
@@ -269,5 +271,15 @@ namespace ExamPoppers.Web.Controllers
 
 			return View(p);
 		}
+        public bool CheckPlayerAnswer(Player p)
+        {
+            bool gotCorrect = false;
+            if (p.Question.CorrectAnswer.Equals(p.PlayerAnswer))
+            {
+                p.Score++;
+                gotCorrect = true;
+            }
+            return gotCorrect;
+        }
 	}
 }
