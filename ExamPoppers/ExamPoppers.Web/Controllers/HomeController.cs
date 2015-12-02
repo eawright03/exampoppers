@@ -167,6 +167,7 @@ namespace ExamPoppers.Web.Controllers
 			});
 		}
 
+		[HttpGet]
 		public ActionResult Game()
 		{
 			var query =
@@ -201,5 +202,56 @@ namespace ExamPoppers.Web.Controllers
 			return View(p);
 		}
 
+		[HttpPost]
+		public ActionResult Game(string questionId, string playerId)
+		{
+			
+
+			var query =
+				from question in db.Question
+				select new
+				{
+					Content = question.Content,
+					Answer1 = question.Answer1,
+					Answer2 = question.Answer2,
+					Answer3 = question.Answer3,
+					Answer4 = question.Answer4
+				};
+			query.ToList();
+
+			List<Question> qList = new List<Question>();
+			foreach (var x in query)
+			{
+				qList.Add(new Question
+				{
+					Content = x.Content,
+					Answer1 = x.Answer1,
+					Answer2 = x.Answer2,
+					Answer3 = x.Answer3,
+					Answer4 = x.Answer4
+				});
+			}
+
+			
+			var p = new Player();
+
+			int pId = 0;
+			int qId = 0;
+
+			try
+			{
+				pId = Int32.Parse(playerId);
+				qId = Int32.Parse(questionId);
+			}
+			catch (FormatException e)
+			{
+				Console.WriteLine(e.Message);
+			}
+
+			p.PlayerId = pId;
+			p.Question = (qId == qList.Count()) ? qList[0] : qList[qId];
+
+			return View(p);
+		}
 	}
 }
