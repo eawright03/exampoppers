@@ -178,7 +178,8 @@ namespace ExamPoppers.Web.Controllers
 					Answer1 = question.Answer1,
 					Answer2 = question.Answer2,
 					Answer3 = question.Answer3,
-					Answer4 = question.Answer4
+					Answer4 = question.Answer4,
+					Id = question.Id
 				};
 			query.ToList();
 
@@ -191,7 +192,8 @@ namespace ExamPoppers.Web.Controllers
 					Answer1 = x.Answer1,
 					Answer2 = x.Answer2,
 					Answer3 = x.Answer3,
-					Answer4 = x.Answer4
+					Answer4 = x.Answer4,
+					Id = x.Id
 				});
 			}
 
@@ -205,7 +207,7 @@ namespace ExamPoppers.Web.Controllers
 		[HttpPost]
 		public ActionResult Game(string questionId, string playerId)
 		{
-			
+			ModelState.Clear();
 
 			var query =
 				from question in db.Question
@@ -215,7 +217,8 @@ namespace ExamPoppers.Web.Controllers
 					Answer1 = question.Answer1,
 					Answer2 = question.Answer2,
 					Answer3 = question.Answer3,
-					Answer4 = question.Answer4
+					Answer4 = question.Answer4,
+					Id = question.Id
 				};
 			query.ToList();
 
@@ -228,7 +231,8 @@ namespace ExamPoppers.Web.Controllers
 					Answer1 = x.Answer1,
 					Answer2 = x.Answer2,
 					Answer3 = x.Answer3,
-					Answer4 = x.Answer4
+					Answer4 = x.Answer4,
+					Id = x.Id
 				});
 			}
 
