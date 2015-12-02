@@ -10,5 +10,7 @@ namespace ExamPoppers.Model
 	{
 		public int PlayerId { get; set; }
 		public Question Question { get; set; }
+        public int Score { get; set; }
+        public string PlayerAnswer { get; set; }
 	}
 }
