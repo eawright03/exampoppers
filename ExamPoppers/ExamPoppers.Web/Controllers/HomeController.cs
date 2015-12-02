@@ -181,6 +181,7 @@ namespace ExamPoppers.Web.Controllers
 		[HttpGet]
 		public ActionResult Game()
 		{
+            ViewBag.CorrectInt = -1;
 			var query =
 				from question in db.Question
 				select new
@@ -218,11 +219,23 @@ namespace ExamPoppers.Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Game(string questionId, string playerId)
+		public ActionResult Game(string questionId, Player play, Question quest, string userAnswer)
 		{
 			ModelState.Clear();
-			
+			//CheckPlayerAnswer(p)
+            int pId = 0;
+            int qId = 0;
 
+            try
+            {
+                //	pId = Int32.Parse(play.PlayerId);
+                pId = play.PlayerId;
+                qId = Int32.Parse(questionId);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 			var query =
 				from question in db.Question
 				select new
@@ -232,6 +245,7 @@ namespace ExamPoppers.Web.Controllers
 					Answer2 = question.Answer2,
 					Answer3 = question.Answer3,
 					Answer4 = question.Answer4,
+                    CorrectAnswer = question.CorrectAnswer,
 					Id = question.Id
 				};
 			query.ToList();
@@ -246,40 +260,44 @@ namespace ExamPoppers.Web.Controllers
 					Answer2 = x.Answer2,
 					Answer3 = x.Answer3,
 					Answer4 = x.Answer4,
+                    CorrectAnswer = x.CorrectAnswer,
 					Id = x.Id
 				});
 			}
 
 			
 			var p = new Player();
+            var count =CheckPlayerAnswer(qList[qId - 1], userAnswer);
+            p.Score += count;
+            ViewBag.CorrectInt = p.Score;
+            //int pId = 0;
+            //int qId = 0;
 
-			int pId = 0;
-			int qId = 0;
-
-			try
-			{
-				pId = Int32.Parse(playerId);
-				qId = Int32.Parse(questionId);
-			}
-			catch (FormatException e)
-			{
-				Console.WriteLine(e.Message);
-			}
+            //try
+            //{
+            ////	pId = Int32.Parse(play.PlayerId);
+            //    pId = play.PlayerId;
+            //    qId = Int32.Parse(questionId);
+            //}
+            //catch (FormatException e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
 
 			p.PlayerId = pId;
 			p.Question = (qId == qList.Count()) ? qList[0] : qList[qId];
 
 			return View(p);
 		}
-        public bool CheckPlayerAnswer(Player p)
+        public int CheckPlayerAnswer(Question q, string playerAnswer)
         {
+            var s = 0;
             bool gotCorrect = false;
-            if (p.Question.CorrectAnswer.Equals(p.PlayerAnswer))
+            if (playerAnswer.Equals(q.CorrectAnswer))
             {
-                p.Score++;
-                gotCorrect = true;
+                s++;
             }
-            return gotCorrect;
+            return s;
         }
 	}
 }

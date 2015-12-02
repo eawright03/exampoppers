@@ -6,35 +6,56 @@
 }
 
 <h2>@Model.Question.Content</h2>
-
+@if (ViewBag.CorrectInt == 1)
+{
+    <div class="panel panel-success">
+  
+    Correct!
+  
+</div>
+    <br />
+}
+else if(ViewBag.CorrectInt ==0)
+{ 
+    
+    <div class="panel panel-danger">
+  
+    Incorrect :(
+  
+</div>
+    
+    <br />
+    
+}
 @using (Html.BeginForm("Game", "Home", FormMethod.Post))
 {
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="input-group">
 				<span class="input-group-addon">
-					<input type="radio" name="UserAnswer">
+                    <input type="radio" name="UserAnswer" value="@Model.Question.Answer1">
 				</span>
 				<span class="form-control">@Model.Question.Answer1</span>
 
 				<span class="input-group-addon">
-					<input type="radio" name="UserAnswer">
+                    <input type="radio" name="UserAnswer" value="@Model.Question.Answer2">
 				</span>
 				<span class="form-control">@Model.Question.Answer2</span>
 
 				<span class="input-group-addon">
-					<input type="radio" name="UserAnswer">
+                    <input type="radio" name="UserAnswer" value="@Model.Question.Answer3">
 				</span>
 				<span class="form-control">@Model.Question.Answer3</span>
 
 				<span class="input-group-addon">
-					<input type="radio" name="UserAnswer">
+                    <input type="radio" name="UserAnswer" value="@Model.Question.Answer4">
 				</span>
 				<span class="form-control">@Model.Question.Answer4</span>
 			</div><!-- /input-group -->
 		</div><!-- /.col-lg-6 -->
 
 		@Html.Hidden("questionId", Model.Question.Id.ToString())
+        @Html.Hidden("question", Model.Question)
 		@Html.Hidden("playerId", Model.PlayerId.ToString())
 		
 
