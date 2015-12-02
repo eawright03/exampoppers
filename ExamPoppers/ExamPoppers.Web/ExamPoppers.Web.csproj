@@ -175,6 +175,7 @@
     <Content Include="Views\Home\AddQuestionandQuestionList.cshtml" />
     <Content Include="Views\Home\_AddQuestion.cshtml" />
     <Content Include="Views\Home\Game.cshtml" />
+    <Content Include="Views\Home\History.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

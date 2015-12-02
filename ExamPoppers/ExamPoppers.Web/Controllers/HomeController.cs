@@ -264,6 +264,15 @@ namespace ExamPoppers.Web.Controllers
 
 			return View(p);
 		}
+        public bool CheckPlayerAnswer(Player p)
+        {
+            bool gotCorrect = false;
+            if(p.Question.CorrectAnswer.Equals(p.PlayerAnswer))
+            {
+                p.Score++;
+                gotCorrect = true;
+            }
+            return gotCorrect;
+        }
 	}
-}
 }
