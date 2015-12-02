@@ -188,6 +188,7 @@ namespace ExamPoppers.Web.Controllers
 					Answer2 = question.Answer2,
 					Answer3 = question.Answer3,
 					Answer4 = question.Answer4,
+					Id = question.Id,
                     CorrectAnswer = question.CorrectAnswer
 				};
 			query.ToList();
@@ -202,6 +203,7 @@ namespace ExamPoppers.Web.Controllers
 					Answer2 = x.Answer2,
 					Answer3 = x.Answer3,
                     Answer4 = x.Answer4,
+					Id = x.Id,
                     CorrectAnswer = x.CorrectAnswer
 				});
 			}
