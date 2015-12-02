@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="EPDatabase.cs" />
     <Compile Include="History.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

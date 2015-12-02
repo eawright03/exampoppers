@@ -25,62 +25,94 @@ namespace ExamPoppers.Web.Controllers
         {
             var query =
                 from q in db.Question
-                select new { Content = q.Content, Answer = q.Answer };
+                select new {
+					Content = q.Content,
+					Answer1 = q.Answer1,
+					Answer2 = q.Answer2,
+					Answer3 = q.Answer3,
+					Answer4 = q.Answer4
+				};
             query.ToList();
 
-            List<Question> qList= new List<Question>();
-            foreach(var x in query)
-            {
-                qList.Add(new Question
-                {
-                    Content = x.Content,
-                    Answer = x.Answer
-                });
-            }
-            return View(qList);
-        }
-        [HttpPost]
-        public ActionResult AddQuestionAndQuestionList(Question que)
-        {
-            var query =
-                from q in db.Question
-                select new { Content = q.Content, Answer = q.Answer };
-            query.ToList();
+			List<Question> qList = new List<Question>();
+			foreach (var x in query)
+			{
+				qList.Add(new Question
+				{
+					Content = x.Content,
+					Answer1 = x.Answer1,
+					Answer2 = x.Answer2,
+					Answer3 = x.Answer3,
+					Answer4 = x.Answer4
+				});
+			}
+			return View(qList);
 
-            List<Question> qList = new List<Question>();
-            foreach (var x in query)
-            {
-                qList.Add(new Question
-                {
-                    Content = x.Content,
-                    Answer = x.Answer
-                });
-            }
-            return View(qList);
-        }
+		}
+  //      [HttpPost]
+  //      public ActionResult AddQuestionAndQuestionList(Question que)
+  //      {
+  //          var query =
+  //              from q in db.Question
+  //              select new { Content = q.Content, Answer = q.Answer };
+		//	query.ToList();
+
+		//	List<Question> qList = new List<Question>();
+		//	foreach (var x in query)
+		//	{
+		//		qList.Add(new Question
+		//		{
+		//			Content = x.Content,
+		//			Answer = x.Answer
+		//		});
+		//	}
+		//	return View(qList);
+		//}
+
         [HttpPost]
         public ActionResult AddQuestion(Question q)
         {
-            //add q to db
-            var query =
+			//
+			//db.Question.Insert(q);
+			//add q to db
+			var query =
                 from question in db.Question
-                select new { Content = question.Content, Answer = question.Answer };
-            query.ToList();
-           // q = new Question();
-            //q.Id = query.Count();
-            db.Question.Insert(q);
-            List<Question> qList = new List<Question>();
-            foreach (var x in query)
-            {
-                qList.Add(new Question
-                {
-                //    Id = x.Id,
-                    Content = x.Content,
-                    Answer = x.Answer
-                });
-            }
+				select new
+				{
+					Content = question.Content,
+					Answer1 = question.Answer1,
+					Answer2 = question.Answer2,
+					Answer3 = question.Answer3,
+					Answer4 = question.Answer4
+				};
+			query.ToList();
 
-            return View("AddQuestionAndQuestionList", qList);
+			List<Question> qList = new List<Question>();
+
+			//db.Question.Insert(new Question
+			//{
+			//	Id = query.Count() + 1,
+			//	Content = q.Content,
+			//	Answer = q.Answer
+			//});
+
+			q.Id = query.Count() + 1;
+			db.Question.Insert(q);
+
+			foreach (var x in query) //How is the new question making it into this query??
+			{
+				qList.Add(new Question
+				{
+					//    Id = x.Id,
+					Content = x.Content,
+					Answer1 = x.Answer1,
+					Answer2 = x.Answer2,
+					Answer3 = x.Answer3,
+					Answer4 = x.Answer4
+				});
+			}
+
+			return View("AddQuestionAndQuestionList", qList);
         }
         public ActionResult NavBar()
         {
@@ -92,10 +124,82 @@ namespace ExamPoppers.Web.Controllers
             db.Question.Insert(new Question {
                 Id = 1,
                 Content = "What color is the sky?",
-                Answer = "Blue"
+                Answer1 = "Blue",
+                Answer2 = "Elephant",
+                Answer3 = "Water",
+                Answer4 = "Carrot"
+			});
+			db.Question.Insert(new Question
+			{
+				Id = 2,
+				Content = "How many fingers does a human have?",
+				Answer1 = "10",
+				Answer2 = "Elephant",
+				Answer3 = "Water",
+                Answer4 = "Carrot"
+			});
+			db.Question.Insert(new Question
+			{
+				Id = 3,
+				Content = "Where in the World is Carmen Sandiego?",
+				Answer1 = "Blue",
+                Answer2 = "Utah",
+                Answer3 = "Water",
+                Answer4 = "Carrot"
+			});
+			db.Question.Insert(new Question
+			{
+				Id = 4,
+				Content = "How much wood did the woodchuck chuck?/",
+				Answer1 = "Blue",
+                Answer2 = "Elephant",
+                Answer3 = "7",
+                Answer4 = "Carrot"
+			});
+			db.Question.Insert(new Question
+			{
+				Id = 5,
+				Content = "Who let the dogs out?",
+				Answer1 = "Blue",
+                Answer2 = "Elephant",
+                Answer3 = "Dr. Doyle",
+                Answer4 = "Carrot"
+			});
+		}
 
-            });
-        }
+		public ActionResult Game()
+		{
+			var query =
+				from question in db.Question
+				select new
+				{
+					Content = question.Content,
+					Answer1 = question.Answer1,
+					Answer2 = question.Answer2,
+					Answer3 = question.Answer3,
+					Answer4 = question.Answer4
+				};
+			query.ToList();
+
+			List<Question> qList = new List<Question>();
+			foreach (var x in query)
+			{
+				qList.Add(new Question
+				{
+					Content = x.Content,
+					Answer1 = x.Answer1,
+					Answer2 = x.Answer2,
+					Answer3 = x.Answer3,
+					Answer4 = x.Answer4
+				});
+			}
+
+			var p = new Player();
+			p.PlayerId = 1;
+			p.Question = qList[0];
+
+			return View(p);
+		}
 
 	}
 }

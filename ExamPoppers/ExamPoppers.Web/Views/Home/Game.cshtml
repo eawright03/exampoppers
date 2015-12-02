@@ -1,0 +1,38 @@
+﻿@model ExamPoppers.Model.Player
+
+@{
+	ViewBag.Title = "Game";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Question.Content</h2>
+
+<div class="row">
+	<div class="col-lg-6">
+		<div class="input-group">
+			<span class="input-group-addon">
+				<input type="radio" name="UserAnswer">
+			</span>
+			<span class="form-control">@Model.Question.Answer1</span>
+
+			<span class="input-group-addon">
+				<input type="radio" name="UserAnswer">
+			</span>
+			<span class="form-control">@Model.Question.Answer2</span>
+
+			<span class="input-group-addon">
+				<input type="radio" name="UserAnswer">
+			</span>
+			<span class="form-control">@Model.Question.Answer3</span>
+
+			<span class="input-group-addon">
+				<input type="radio" name="UserAnswer">
+			</span>
+			<span class="form-control">@Model.Question.Answer4</span>
+		</div><!-- /input-group -->
+	</div><!-- /.col-lg-6 -->
+	<div class="col-lg-6">
+		<button type="button" class="btn btn-default">Submit</button>
+	</div>
+</div><!-- /.row -->
+

@@ -30,9 +30,9 @@ namespace ExamPoppers.Model
             this.Question = questionTable;
             this.History = historyTable;
         }
-        public ITable<Question> Question { get; private set; }
+        public ITable<Question> Question { get; set; }
 
-        public ITable<History> History { get; private set; }
+        public ITable<History> History { get; set; }
 
     }
 }
